@@ -1,4 +1,4 @@
-﻿#include <fstream>
+#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -21,10 +21,10 @@ struct Face {
 		d1=0, d2=0, d3=0;
 };
 
-vector<Point*> vertexs;
+vector<Point*> vertexs; //点
 vector<Chartlet*> chartlets;
-vector<Point*> normal_vectors;
-vector<Face*> faces;
+vector<Point*> normal_vectors; //点法向量
+vector<Face*> faces; //面
 
 float getDistance(int i, int j)
 {
@@ -132,6 +132,7 @@ void readFile(string ifilename)
 	ifile.close();
 }
 
+//用于边收缩的寻点算法
 pair<int, int> getVertexToDel()
 {
 	float value = INT_MAX;
@@ -257,8 +258,10 @@ int main() {
 	ofilename = "test.obj";
 	// cin >> ofilename;	
 
-	readFile(ifilename);
+	readFile(ifilename); //读取并解析obj文件
 
+
+	// 简化
 	for (int i=0;i<vertexs.size()/4;i++)
 		Simplify(getVertexToDel());
 
@@ -266,6 +269,7 @@ int main() {
 	ifstream ifile(ifilename);
 	string line;
 
+	// 将简化后的模型数据格式化写入新的obj文件
 	if (ofile)
 	{
 		bool vertex = true, face = true;
