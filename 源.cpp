@@ -1,0 +1,320 @@
+﻿#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Point {
+	float x, y, z;
+};
+
+struct Chartlet {
+	float x, y;
+};
+
+struct Face {
+	int a1, a2, a3, 
+		b1, b2, b3, 
+		c1, c2, c3, 
+		d1=0, d2=0, d3=0;
+};
+
+vector<Point*> vertexs;
+vector<Chartlet*> chartlets;
+vector<Point*> normal_vectors;
+vector<Face*> faces;
+
+float getDistance(int i, int j)
+{
+	float distance = (vertexs[i]->x - vertexs[j]->x)*(vertexs[i]->x - vertexs[j]->x)
+		+ (vertexs[i]->y - vertexs[j]->y)*(vertexs[i]->y - vertexs[j]->y)
+		+ (vertexs[i]->z - vertexs[j]->z)*(vertexs[i]->z - vertexs[j]->z);
+
+	return distance;
+}
+
+void readFile(string ifilename)
+{
+	ifstream ifile(ifilename);
+	string line;
+
+	if (ifile)
+	{
+		while (!ifile.eof())
+		{
+			float x, y, z;
+			int a1, a2, a3, b1, b2, b3, c1, c2, c3, d1=0, d2=0, d3=0;
+			getline(ifile, line);
+			stringstream ss;
+			switch (line[0])
+			{
+			case 'v':
+				switch (line[1])
+				{
+				case ' ':
+					line.erase(0, 2);
+					ss << line;
+					ss >> x >> y >> z;
+					{
+						Point* tmpv = new Point;
+						tmpv->x = x;
+						tmpv->y = y;
+						tmpv->z = z;
+						vertexs.push_back(tmpv);
+					}
+					break;
+				case 't':
+					line.erase(0, 2);
+					ss << line;
+					ss >> x >> y;
+					{
+						Chartlet* tmpc = new Chartlet;
+						tmpc->x = x;
+						tmpc->y = y;
+						chartlets.push_back(tmpc);
+					}
+					break;
+				case 'n':
+					line.erase(0, 2);
+					ss << line;
+					ss >> x >> y >> z;
+					{
+						Point* tmpn = new Point;
+						tmpn->x = x;
+						tmpn->y = y;
+						tmpn->z = z;
+						normal_vectors.push_back(tmpn);
+					}
+					break;
+				default:
+					break;
+				}
+				break;
+			case 'f':
+				char ch;
+				line.erase(0, 2);
+				ss << line;
+				ss >> a1 >> ch >> a2 >> ch >> a3
+					>> b1 >> ch >> b2 >> ch >> b3
+					>> c1 >> ch >> c2 >> ch >> c3;
+				if (!ss.eof())
+					ss >> d1 >> ch >> d2 >> ch >> d3 >> ch;
+				{
+					Face* tmpf = new Face;
+					tmpf->a1 = a1;
+					tmpf->a2 = a2;
+					tmpf->a3 = a3;
+					tmpf->b1 = b1;
+					tmpf->b2 = b2;
+					tmpf->b3 = b3;
+					tmpf->c1 = c1;
+					tmpf->c2 = c2;
+					tmpf->c3 = c3;
+					tmpf->d1 = d1;
+					tmpf->d2 = d2;
+					tmpf->d3 = d3;
+					faces.push_back(tmpf);
+				}
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	else
+	{
+		cout << "fail to open the input file" << endl;
+		return;
+	}
+
+	ifile.close();
+}
+
+pair<int, int> getVertexToDel()
+{
+	float value = INT_MAX;
+	pair<int, int> index;
+	for (int i = 0; i < vertexs.size(); i++)
+	{
+		for (int j = i + 1; j < vertexs.size(); j++)
+		{
+			float distance = getDistance(i, j);
+			if (distance < value)
+			{
+				value = distance;
+				index.first = i + 1;
+				index.second = j + 1;
+			}
+		}
+	}
+
+	return index;
+}
+
+void revise(Face* f, pair<int, int> index)
+{
+	if (f->a1 > index.first)
+		f->a1--;
+	if (f->b1 > index.first)
+		f->b1--;
+	if (f->c1 > index.first)
+		f->c1--;
+	if (f->d1 > index.first)
+		f->d1--;
+
+}
+
+void Simplify(pair<int, int> index)
+{
+	for (int i = 0; i < faces.size(); i++)
+	{
+		if (faces[i]->a1 == index.first || faces[i]->b1 == index.first || faces[i]->c1 == index.first || faces[i]->d1 == index.first)
+		{
+			if (faces[i]->a1 == index.second || faces[i]->b1 == index.second || faces[i]->c1 == index.second || faces[i]->d1 == index.second)
+			{
+				if (faces[i]->d1 == 0)
+				{
+					delete faces[i];
+					faces.erase(faces.begin() + i);
+					i--;
+				}
+				else
+				{
+					if (faces[i]->a1 == index.first)
+					{
+						faces[i]->a1 = faces[i]->d1; faces[i]->a2 = faces[i]->d2; faces[i]->a3 = faces[i]->d3;
+						faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+						continue;
+					}
+					if (faces[i]->b1 == index.first)
+					{
+						faces[i]->b1 = faces[i]->d1; faces[i]->b2 = faces[i]->d2; faces[i]->b3 = faces[i]->d3;
+						faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+						continue;
+					}
+					if (faces[i]->c1 == index.first)
+					{
+						faces[i]->c1 = faces[i]->d1; faces[i]->c2 = faces[i]->d2; faces[i]->c3 = faces[i]->d3;
+						faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+						continue;
+					}
+					if (faces[i]->d1 == index.first)
+					{
+						faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+						continue;
+					}
+				}
+			}
+			else
+			{
+				if (faces[i]->a1 == index.first)
+				{
+					faces[i]->a1 = index.second;
+					continue;
+				}
+				if (faces[i]->b1 == index.first)
+				{
+					faces[i]->b1 = index.second;
+					continue;
+				}
+				if (faces[i]->c1 == index.first)
+				{
+					faces[i]->c1 = index.second;
+					continue;
+				}
+				if (faces[i]->d1 == index.first)
+				{
+					faces[i]->d1 = index.second;
+					continue;
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < faces.size(); i++)
+	{
+		if (faces[i]->a1 > index.first)
+			faces[i]->a1--;
+		if (faces[i]->b1 > index.first)
+			faces[i]->b1--;
+		if (faces[i]->c1 > index.first)
+			faces[i]->c1--;
+		if (faces[i]->d1 > index.first)
+			faces[i]->d1--;
+	}
+
+	vertexs.erase(vertexs.begin() + index.first - 1);
+}
+
+int main() {
+	string ifilename, ofilename;
+	cout << "Please input the name of file to be read" << endl;
+	ifilename = "cylinder.obj";
+	//cin >> ifilename;
+	cout << "Please input the name of file to be written" << endl;
+	ofilename = "test.obj";
+	// cin >> ofilename;	
+
+	readFile(ifilename);
+
+	for (int i=0;i<vertexs.size()/4;i++)
+		Simplify(getVertexToDel());
+
+	ofstream ofile(ofilename);
+	ifstream ifile(ifilename);
+	string line;
+
+	if (ofile)
+	{
+		bool vertex = true, face = true;
+		while (!ifile.eof())
+		{
+			getline(ifile, line);
+			switch (line[0])
+			{
+			case 'v':
+				if (vertex)
+				{
+					for (int i = 0; i < vertexs.size(); i++)
+						ofile << "v " << vertexs[i]->x << ' ' << vertexs[i]->y << ' ' << vertexs[i]->z << '\n';
+					for (int i = 0; i < chartlets.size(); i++)
+						ofile << "vt " << chartlets[i]->x << ' ' << chartlets[i]->y << '\n';
+					for (int i = 0; i < normal_vectors.size(); i++)
+						ofile << "vn " << normal_vectors[i]->x << ' ' << normal_vectors[i]->y << ' ' << normal_vectors[i]->z << '\n';
+					vertex = false;
+				}
+				break;
+			case 'f':
+				if (face)
+				{
+					for (int i = 0; i < faces.size(); i++)
+					{
+						ofile << "f " << faces[i]->a1 << '/' << faces[i]->a2 << '/' << faces[i]->a3 << ' '
+							<< faces[i]->b1 << '/' << faces[i]->b2 << '/' << faces[i]->b3 << ' '
+							<< faces[i]->c1 << '/' << faces[i]->c2 << '/' << faces[i]->c3;
+						if (faces[i]->d1 != 0)
+							ofile << ' ' << faces[i]->d1 << '/' << faces[i]->d2 << '/' << faces[i]->d3 << '\n';
+						else
+							ofile << '\n';
+					}
+						
+					face = false;
+				}				
+				break;
+			default:
+				ofile << line << '\n';
+				break;
+			}
+		}
+	}
+	else
+	{
+		cout << "fail to open the output file" << endl;
+	}
+	ifile.close();
+	ofile.close();
+
+	return 0;
+}
