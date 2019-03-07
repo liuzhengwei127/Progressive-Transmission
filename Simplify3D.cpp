@@ -21,10 +21,10 @@ struct Face {
 		d1=0, d2=0, d3=0;
 };
 
-vector<Point*> vertexs; //点
+vector<Point*> vertexs;
 vector<Chartlet*> chartlets;
-vector<Point*> normal_vectors; //点法向量
-vector<Face*> faces; //面
+vector<Point*> normal_vectors;
+vector<Face*> faces;
 
 float getDistance(int i, int j)
 {
@@ -132,7 +132,6 @@ void readFile(string ifilename)
 	ifile.close();
 }
 
-//用于边收缩的寻点算法
 pair<int, int> getVertexToDel()
 {
 	float value = INT_MAX;
@@ -177,12 +176,14 @@ void Simplify(pair<int, int> index)
 			{
 				if (faces[i]->d1 == 0)
 				{
+					//包含三个点的面中含收缩边的两个点
 					delete faces[i];
 					faces.erase(faces.begin() + i);
 					i--;
 				}
 				else
 				{
+					//包含四个点的面中含收缩边的两个点
 					if (faces[i]->a1 == index.first)
 					{
 						faces[i]->a1 = faces[i]->d1; faces[i]->a2 = faces[i]->d2; faces[i]->a3 = faces[i]->d3;
@@ -210,25 +211,99 @@ void Simplify(pair<int, int> index)
 			}
 			else
 			{
-				if (faces[i]->a1 == index.first)
+				if (faces[i]->d1 == 0)
 				{
-					faces[i]->a1 = index.second;
-					continue;
+					//包含三个点的面中含收缩边的一个点
+					if (faces[i]->a1 == index.first)
+					{
+						faces[i]->a1 = index.second;
+						continue;
+					}
+					if (faces[i]->b1 == index.first)
+					{
+						faces[i]->b1 = index.second;
+						continue;
+					}
+					if (faces[i]->c1 == index.first)
+					{
+						faces[i]->c1 = index.second;
+						continue;
+					}
 				}
-				if (faces[i]->b1 == index.first)
+				else
 				{
-					faces[i]->b1 = index.second;
-					continue;
-				}
-				if (faces[i]->c1 == index.first)
-				{
-					faces[i]->c1 = index.second;
-					continue;
-				}
-				if (faces[i]->d1 == index.first)
-				{
-					faces[i]->d1 = index.second;
-					continue;
+					//包含四个点的面含收缩边的一个点
+					if (faces[i]->a1 == index.first)
+					{
+						Face* tmpf = new Face;
+						tmpf->a1 = faces[i]->a1;
+						tmpf->a2 = faces[i]->a2;
+						tmpf->a3 = faces[i]->a3;
+						tmpf->b1 = faces[i]->b1;
+						tmpf->b2 = faces[i]->b2;
+						tmpf->b3 = faces[i]->b3;
+						tmpf->c1 = faces[i]->d1;
+						tmpf->c2 = faces[i]->d2;
+						tmpf->c3 = faces[i]->d3;
+						faces.push_back(tmpf);
+
+						faces[i]->a1 = faces[i]->d1;
+						faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+						continue;
+					}
+					if (faces[i]->b1 == index.first)
+					{
+						Face* tmpf = new Face;
+						tmpf->a1 = faces[i]->a1;
+						tmpf->a2 = faces[i]->a2;
+						tmpf->a3 = faces[i]->a3;
+						tmpf->b1 = faces[i]->b1;
+						tmpf->b2 = faces[i]->b2;
+						tmpf->b3 = faces[i]->b3;
+						tmpf->c1 = faces[i]->c1;
+						tmpf->c2 = faces[i]->c2;
+						tmpf->c3 = faces[i]->c3;
+						faces.push_back(tmpf);
+
+						faces[i]->b1 = faces[i]->d1;
+						faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+						continue;
+					}
+					if (faces[i]->c1 == index.first)
+					{
+						Face* tmpf = new Face;
+						tmpf->a1 = faces[i]->d1;
+						tmpf->a2 = faces[i]->d2;
+						tmpf->a3 = faces[i]->d3;
+						tmpf->b1 = faces[i]->b1;
+						tmpf->b2 = faces[i]->b2;
+						tmpf->b3 = faces[i]->b3;
+						tmpf->c1 = faces[i]->c1;
+						tmpf->c2 = faces[i]->c2;
+						tmpf->c3 = faces[i]->c3;
+						faces.push_back(tmpf);
+
+						faces[i]->c1 = faces[i]->d1;
+						faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+						continue;
+					}
+					if (faces[i]->d1 == index.first)
+					{
+						Face* tmpf = new Face;
+						tmpf->a1 = faces[i]->a1;
+						tmpf->a2 = faces[i]->a2;
+						tmpf->a3 = faces[i]->a3;
+						tmpf->b1 = faces[i]->b1;
+						tmpf->b2 = faces[i]->b2;
+						tmpf->b3 = faces[i]->b3;
+						tmpf->c1 = faces[i]->d1;
+						tmpf->c2 = faces[i]->d2;
+						tmpf->c3 = faces[i]->d3;
+						faces.push_back(tmpf);
+
+						faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+						continue;
+					}
 				}
 			}
 		}
@@ -252,16 +327,14 @@ void Simplify(pair<int, int> index)
 int main() {
 	string ifilename, ofilename;
 	cout << "Please input the name of file to be read" << endl;
-	ifilename = "cylinder.obj";
+	ifilename = "cube.obj";
 	//cin >> ifilename;
 	cout << "Please input the name of file to be written" << endl;
 	ofilename = "test.obj";
 	// cin >> ofilename;	
 
-	readFile(ifilename); //读取并解析obj文件
+	readFile(ifilename);
 
-
-	// 简化
 	for (int i=0;i<vertexs.size()/4;i++)
 		Simplify(getVertexToDel());
 
@@ -269,7 +342,6 @@ int main() {
 	ifstream ifile(ifilename);
 	string line;
 
-	// 将简化后的模型数据格式化写入新的obj文件
 	if (ofile)
 	{
 		bool vertex = true, face = true;
