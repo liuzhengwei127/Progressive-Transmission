@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -26,13 +27,39 @@ vector<Chartlet*> chartlets;
 vector<Point*> normal_vectors;
 vector<Face*> faces;
 
+float getDistanceF(int index, int v1, int v2, int v3) {
+	float u1 = vertexs[v1]->x - vertexs[v2]->x,
+		u2 = vertexs[v1]->y - vertexs[v2]->y,
+		u3 = vertexs[v1]->z - vertexs[v2]->z,
+		w1 = vertexs[v1]->x - vertexs[v3]->x,
+		w2 = vertexs[v1]->y - vertexs[v3]->y,
+		w3 = vertexs[v1]->z - vertexs[v3]->z;
+
+	float a = u2 * v3 - u3 * v2,
+		b = u3 * v1 - u1 * v3,
+		c = u1 * v2 - u2 * v1,
+		d = -(a*vertexs[v1]->x + b * vertexs[v1]->y + c * vertexs[v1]->z);
+
+	float mod = sqrt((a*a + b * b + c * c));
+
+	return (a* vertexs[index]->x + b * vertexs[index]->y + c * vertexs[index]->y + d) / mod;
+}
+
 float getDistance(int i, int j)
 {
-	float distance = (vertexs[i]->x - vertexs[j]->x)*(vertexs[i]->x - vertexs[j]->x)
-		+ (vertexs[i]->y - vertexs[j]->y)*(vertexs[i]->y - vertexs[j]->y)
-		+ (vertexs[i]->z - vertexs[j]->z)*(vertexs[i]->z - vertexs[j]->z);
+	// 简化的QEM算法
+	float distance = 0;
+	int count = 0;
 
-	return distance;
+	for (int k = 0; k < faces.size(); k++) {
+		if (faces[k]->a1 == i + 1 || faces[k]->b1 == i + 1 || faces[k]->c1 == i + 1 || faces[k]->d1 == i + 1
+			|| faces[k]->a1 == j + 1 || faces[k]->b1 == j + 1 || faces[k]->c1 == j + 1 || faces[k]->d1 == j + 1) {
+			distance += getDistanceF(j, faces[k]->a1 - 1, faces[k]->b1 - 1, faces[k]->c1 - 1);
+			count++;
+		}
+	}
+
+	return distance/count;
 }
 
 void readFile(string ifilename)
@@ -327,7 +354,7 @@ void Simplify(pair<int, int> index)
 int main() {
 	string ifilename, ofilename;
 	cout << "Please input the name of file to be read" << endl;
-	ifilename = "cube.obj";
+	ifilename = "cylinder.obj";
 	//cin >> ifilename;
 	cout << "Please input the name of file to be written" << endl;
 	ofilename = "test.obj";
