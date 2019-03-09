@@ -1,0 +1,3 @@
+C:/Users/75667/CLionProjects/Simplify3D/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/75667/CLionProjects/Simplify3D/cmake-build-debug/CMakeFiles/Simplify3D.dir
+C:/Users/75667/CLionProjects/Simplify3D/cmake-build-debug/CMakeFiles/edit_cache.dir
