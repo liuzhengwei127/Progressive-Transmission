@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/75667/CLionProjects/Simplify3D/main.cpp
+fstream
+-
+iostream
+-
+sstream
+-
+string
+-
+vector
+-
+cmath
+-
+

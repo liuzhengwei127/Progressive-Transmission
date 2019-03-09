@@ -28,6 +28,7 @@ vector<Point*> normal_vectors;
 vector<Face*> faces;
 
 float getDistanceF(int index, int v1, int v2, int v3) {
+    // 计算点到面的距离
     float u1 = vertexs[v1]->x - vertexs[v2]->x,
             u2 = vertexs[v1]->y - vertexs[v2]->y,
             u3 = vertexs[v1]->z - vertexs[v2]->z,
@@ -35,14 +36,14 @@ float getDistanceF(int index, int v1, int v2, int v3) {
             w2 = vertexs[v1]->y - vertexs[v3]->y,
             w3 = vertexs[v1]->z - vertexs[v3]->z;
 
-    float a = u2 * v3 - u3 * v2,
-            b = u3 * v1 - u1 * v3,
-            c = u1 * v2 - u2 * v1,
-            d = -(a*vertexs[v1]->x + b * vertexs[v1]->y + c * vertexs[v1]->z);
+    float a = u2 * w3 - u3 * w2,
+            b = u3 * w1 - u1 * w3,
+            c = u1 * w2 - u2 * w1,
+            d = -(a*vertexs[v2]->x + b * vertexs[v2]->y + c * vertexs[v2]->z);
 
-    float mod = sqrt((a*a + b * b + c * c));
+    float mod = sqrt((a * a + b * b + c * c));
 
-    return (a* vertexs[index]->x + b * vertexs[index]->y + c * vertexs[index]->y + d) / mod;
+    return abs(a* vertexs[index]->x + b * vertexs[index]->y + c * vertexs[index]->z + d) / mod;
 }
 
 float getDistance(int i, int j)
@@ -62,135 +63,33 @@ float getDistance(int i, int j)
     return distance/count;
 }
 
-void readFile(string ifilename)
-{
-    ifstream ifile(ifilename);
-    string line;
-
-    if (ifile)
-    {
-        while (!ifile.eof())
-        {
-            float x, y, z;
-            int a1, a2, a3, b1, b2, b3, c1, c2, c3, d1=0, d2=0, d3=0;
-            getline(ifile, line);
-            stringstream ss;
-            switch (line[0])
-            {
-                case 'v':
-                    switch (line[1])
-                    {
-                        case ' ':
-                            line.erase(0, 2);
-                            ss << line;
-                            ss >> x >> y >> z;
-                            {
-                                Point* tmpv = new Point;
-                                tmpv->x = x;
-                                tmpv->y = y;
-                                tmpv->z = z;
-                                vertexs.push_back(tmpv);
-                            }
-                            break;
-                        case 't':
-                            line.erase(0, 2);
-                            ss << line;
-                            ss >> x >> y;
-                            {
-                                Chartlet* tmpc = new Chartlet;
-                                tmpc->x = x;
-                                tmpc->y = y;
-                                chartlets.push_back(tmpc);
-                            }
-                            break;
-                        case 'n':
-                            line.erase(0, 2);
-                            ss << line;
-                            ss >> x >> y >> z;
-                            {
-                                Point* tmpn = new Point;
-                                tmpn->x = x;
-                                tmpn->y = y;
-                                tmpn->z = z;
-                                normal_vectors.push_back(tmpn);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 'f':
-                    char ch;
-                    line.erase(0, 2);
-                    ss << line;
-                    ss >> a1 >> ch >> a2 >> ch >> a3
-                       >> b1 >> ch >> b2 >> ch >> b3
-                       >> c1 >> ch >> c2 >> ch >> c3;
-                    if (!ss.eof())
-                        ss >> d1 >> ch >> d2 >> ch >> d3 >> ch;
-                    {
-                        Face* tmpf = new Face;
-                        tmpf->a1 = a1;
-                        tmpf->a2 = a2;
-                        tmpf->a3 = a3;
-                        tmpf->b1 = b1;
-                        tmpf->b2 = b2;
-                        tmpf->b3 = b3;
-                        tmpf->c1 = c1;
-                        tmpf->c2 = c2;
-                        tmpf->c3 = c3;
-                        tmpf->d1 = d1;
-                        tmpf->d2 = d2;
-                        tmpf->d3 = d3;
-                        faces.push_back(tmpf);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-    else
-    {
-        cout << "fail to open the input file" << endl;
-        return;
-    }
-
-    ifile.close();
-}
-
 pair<int, int> getVertexToDel()
 {
     float value = INT_MAX;
     pair<int, int> index;
     for (int i = 0; i < vertexs.size(); i++)
     {
-        for (int j = i + 1; j < vertexs.size(); j++)
+        for (int j = 0; j < vertexs.size(); j++)
         {
-            float distance = getDistance(i, j);
-            if (distance < value)
-            {
-                value = distance;
-                index.first = i + 1;
-                index.second = j + 1;
+            if (i != j){
+                for (int k=0;k<faces.size();k++){
+                    if ( (faces[k]->a1 == i+1 || faces[k]->b1 == i+1 || faces[k]->c1 == i+1 || faces[k]->d1 == i+1)
+                    && (faces[k]->a1 == j+1 || faces[k]->b1 == j+1 || faces[k]->c1 == j+1 || faces[k]->d1 == j+1) ){
+                        float distance = getDistance(i, j);
+                        if (distance < value)
+                        {
+                            value = distance;
+                            index.first = i + 1;
+                            index.second = j + 1;
+                        }
+                        break;
+                    }
+                }
             }
         }
     }
 
     return index;
-}
-
-void revise(Face* f, pair<int, int> index)
-{
-    if (f->a1 > index.first)
-        f->a1--;
-    if (f->b1 > index.first)
-        f->b1--;
-    if (f->c1 > index.first)
-        f->c1--;
-    if (f->d1 > index.first)
-        f->d1--;
-
 }
 
 void Simplify(pair<int, int> index)
@@ -351,18 +250,115 @@ void Simplify(pair<int, int> index)
     vertexs.erase(vertexs.begin() + index.first - 1);
 }
 
+void readFile(string ifilename)
+{
+    ifstream ifile(ifilename);
+    string line;
+
+    if (ifile)
+    {
+        while (!ifile.eof())
+        {
+            float x, y, z;
+            int a1, a2, a3, b1, b2, b3, c1, c2, c3, d1=0, d2=0, d3=0;
+            getline(ifile, line);
+            stringstream ss;
+            switch (line[0])
+            {
+                case 'v':
+                    switch (line[1])
+                    {
+                        case ' ':
+                            line.erase(0, 2);
+                            ss << line;
+                            ss >> x >> y >> z;
+                            {
+                                Point* tmpv = new Point;
+                                tmpv->x = x;
+                                tmpv->y = y;
+                                tmpv->z = z;
+                                vertexs.push_back(tmpv);
+                            }
+                            break;
+                        case 't':
+                            line.erase(0, 2);
+                            ss << line;
+                            ss >> x >> y;
+                            {
+                                Chartlet* tmpc = new Chartlet;
+                                tmpc->x = x;
+                                tmpc->y = y;
+                                chartlets.push_back(tmpc);
+                            }
+                            break;
+                        case 'n':
+                            line.erase(0, 2);
+                            ss << line;
+                            ss >> x >> y >> z;
+                            {
+                                Point* tmpn = new Point;
+                                tmpn->x = x;
+                                tmpn->y = y;
+                                tmpn->z = z;
+                                normal_vectors.push_back(tmpn);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 'f':
+                    char ch;
+                    line.erase(0, 2);
+                    ss << line;
+                    ss >> a1 >> ch >> a2 >> ch >> a3
+                       >> b1 >> ch >> b2 >> ch >> b3
+                       >> c1 >> ch >> c2 >> ch >> c3;
+                    if (!ss.eof())
+                        ss >> d1 >> ch >> d2 >> ch >> d3 >> ch;
+                    {
+                        Face* tmpf = new Face;
+                        tmpf->a1 = a1;
+                        tmpf->a2 = a2;
+                        tmpf->a3 = a3;
+                        tmpf->b1 = b1;
+                        tmpf->b2 = b2;
+                        tmpf->b3 = b3;
+                        tmpf->c1 = c1;
+                        tmpf->c2 = c2;
+                        tmpf->c3 = c3;
+                        tmpf->d1 = d1;
+                        tmpf->d2 = d2;
+                        tmpf->d3 = d3;
+                        faces.push_back(tmpf);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    else
+    {
+        cout << "fail to open the input file" << endl;
+        return;
+    }
+
+    ifile.close();
+}
+
 int main() {
     string ifilename, ofilename;
     cout << "Please input the name of file to be read" << endl;
     ifilename = "cylinder.obj";
     //cin >> ifilename;
     cout << "Please input the name of file to be written" << endl;
-    ofilename = "test.obj";
+    ofilename = "output.obj";
     // cin >> ofilename;
 
     readFile(ifilename);
 
-    for (int i=0;i<vertexs.size()/4;i++)
+    for (int i=0;i<vertexs.size()/5;i++)
         Simplify(getVertexToDel());
 
     ofstream ofile(ofilename);
