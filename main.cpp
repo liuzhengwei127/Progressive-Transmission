@@ -19,7 +19,7 @@ struct Face {
     int a1, a2, a3,
             b1, b2, b3,
             c1, c2, c3,
-            d1=0, d2=0, d3=0;
+            d1 = 0, d2 = 0, d3 = 0;
 };
 
 vector<Point*> vertexs;
@@ -48,6 +48,7 @@ float getDistanceF(int index, int v1, int v2, int v3) {
 
 float getDistance(int i, int j)
 {
+
     // 简化的QEM算法
     float distance = 0;
     int count = 0;
@@ -60,7 +61,17 @@ float getDistance(int i, int j)
         }
     }
 
-    return distance/count;
+    return distance / count;
+
+
+
+
+    /*
+    // 最短边算法
+    float distance = pow((vertexs[i]->x - vertexs[j]->x), 2) + pow((vertexs[i]->y - vertexs[j]->y), 2) + pow((vertexs[i]->z - vertexs[j]->z), 2);
+
+    return distance;
+    */
 }
 
 pair<int, int> getVertexToDel()
@@ -69,20 +80,33 @@ pair<int, int> getVertexToDel()
     pair<int, int> index;
     for (int i = 0; i < vertexs.size(); i++)
     {
-        for (int j = 0; j < vertexs.size(); j++)
+        for (int j = i + 1; j < vertexs.size(); j++)
         {
-            if (i != j){
-                for (int k=0;k<faces.size();k++){
-                    if ( (faces[k]->a1 == i+1 || faces[k]->b1 == i+1 || faces[k]->c1 == i+1 || faces[k]->d1 == i+1)
-                    && (faces[k]->a1 == j+1 || faces[k]->b1 == j+1 || faces[k]->c1 == j+1 || faces[k]->d1 == j+1) ){
-                        float distance = getDistance(i, j);
-                        if (distance < value)
-                        {
+            if (i != j) {
+                float distance = getDistance(i, j);
+                if (distance < value)
+                {
+                    for (int k = 0; k<faces.size(); k++) {
+                        if ((faces[k]->a1 == i + 1 || faces[k]->b1 == i + 1 || faces[k]->c1 == i + 1 || faces[k]->d1 == i + 1)
+                            && (faces[k]->a1 == j + 1 || faces[k]->b1 == j + 1 || faces[k]->c1 == j + 1 || faces[k]->d1 == j + 1)) {
                             value = distance;
                             index.first = i + 1;
                             index.second = j + 1;
+                            break;
                         }
-                        break;
+                    }
+                }
+                distance = getDistance(j, i);
+                if (distance < value)
+                {
+                    for (int k = 0; k<faces.size(); k++) {
+                        if ((faces[k]->a1 == i + 1 || faces[k]->b1 == i + 1 || faces[k]->c1 == i + 1 || faces[k]->d1 == i + 1)
+                            && (faces[k]->a1 == j + 1 || faces[k]->b1 == j + 1 || faces[k]->c1 == j + 1 || faces[k]->d1 == j + 1)) {
+                            value = distance;
+                            index.first = j + 1;
+                            index.second = i + 1;
+                            break;
+                        }
                     }
                 }
             }
@@ -252,6 +276,7 @@ void Simplify(pair<int, int> index)
 
 void readFile(string ifilename)
 {
+    // obj文件解析
     ifstream ifile(ifilename);
     string line;
 
@@ -260,7 +285,7 @@ void readFile(string ifilename)
         while (!ifile.eof())
         {
             float x, y, z;
-            int a1, a2, a3, b1, b2, b3, c1, c2, c3, d1=0, d2=0, d3=0;
+            int a1, a2, a3, b1, b2, b3, c1, c2, c3, d1 = 0, d2 = 0, d3 = 0;
             getline(ifile, line);
             stringstream ss;
             switch (line[0])
@@ -311,9 +336,35 @@ void readFile(string ifilename)
                     char ch;
                     line.erase(0, 2);
                     ss << line;
-                    ss >> a1 >> ch >> a2 >> ch >> a3
-                       >> b1 >> ch >> b2 >> ch >> b3
-                       >> c1 >> ch >> c2 >> ch >> c3;
+                    ss >> a1 >> ch >> ch;
+                    if (ch == '/') {
+                        a2 = 0;
+                        ss >> a3;
+                    }
+                    else {
+                        ss.unget();
+                        ss >> a2 >> ch >> a3;
+                    }
+
+                    ss >> b1 >> ch >> ch;
+                    if (ch == '/') {
+                        b2 = 0;
+                        ss >> b3;
+                    }
+                    else {
+                        ss.unget();
+                        ss >> b2 >> ch >> b3;
+                    }
+
+                    ss >> c1 >> ch >> ch;
+                    if (ch == '/') {
+                        c2 = 0;
+                        ss >> c3;
+                    }
+                    else {
+                        ss.unget();
+                        ss >> c2 >> ch >> c3;
+                    }
                     if (!ss.eof())
                         ss >> d1 >> ch >> d2 >> ch >> d3 >> ch;
                     {
@@ -350,7 +401,7 @@ void readFile(string ifilename)
 int main() {
     string ifilename, ofilename;
     cout << "Please input the name of file to be read" << endl;
-    ifilename = "cylinder.obj";
+    ifilename = "Bigmax_White_OBJ.obj";
     //cin >> ifilename;
     cout << "Please input the name of file to be written" << endl;
     ofilename = "output.obj";
@@ -358,7 +409,11 @@ int main() {
 
     readFile(ifilename);
 
-    for (int i=0;i<vertexs.size()/5;i++)
+    int circle = vertexs.size() / 4;
+    //int circle = vertexs.size() / 2;
+    //int circle = vertexs.size() / 2 + vertexs.size() / 3;
+
+    for (int i = 0; i< circle; i++)
         Simplify(getVertexToDel());
 
     ofstream ofile(ofilename);

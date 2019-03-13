@@ -12,10 +12,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d6252bb-af0d-45bd-b006-70353361b049" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simplify3D.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/vc140.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/vc140.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.ilk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/output.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -27,7 +30,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor" />
@@ -36,35 +39,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="372" lean-forward="true" selection-start-line="372" selection-end-line="372" />
+            <state>
+              <caret selection-end-line="441" selection-end-column="1" />
               <folding>
-                <element signature="e#1112#1636#0" />
-                <element signature="e#1640#2131#0" />
-                <element signature="e#2098#8337#0" />
-                <element signature="e#1638#4896#0" />
+                <element signature="e#134#169#1" />
+                <element signature="e#172#207#1" />
+                <element signature="e#210#323#1" />
+                <element signature="e#432#1131#0" />
+                <element signature="e#1133#1657#0" />
+                <element signature="e#1659#2588#0" />
+                <element signature="e#2590#8829#0" />
+                <element signature="e#8831#12762#0" />
+                <element signature="e#12764#15231#0" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmake-build-debug/cube.obj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmake-build-debug/cylinder.obj">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -85,10 +74,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1401" />
+    <option name="height" value="1002" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -119,15 +108,17 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\75667\CLionProjects\Simplify3D\cmake-build-debug" />
+      <recent name="C:\Users\75667\CLionProjects\Simplify3D\cmake-build-debug\CMakeFiles" />
+      <recent name="C:\Users\75667\CLionProjects\Simplify3D" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\75667\CLionProjects\Simplify3D\cmake-build-debug" />
       <recent name="C:\Users\75667\CLionProjects\Simplify3D\cmake-build-debug\CMakeFiles" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\75667\CLionProjects\Simplify3D\cmake-build-debug" />
-      <recent name="C:\Users\75667\CLionProjects\Simplify3D" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -159,12 +150,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1552136880270</updated>
-      <workItem from="1552136884444" duration="4372000" />
+      <workItem from="1552136884444" duration="4619000" />
+      <workItem from="1552306411561" duration="6000" />
+      <workItem from="1552306422164" duration="1000" />
+      <workItem from="1552451643589" duration="842000" />
+      <workItem from="1552452513966" duration="246000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4372000" />
+    <option name="totallyTimeSpent" value="5714000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -176,29 +171,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17857143" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18997575" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="CMake" weight="0.329718" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.329718" />
-      <window_info anchor="bottom" id="Terminal" weight="0.30985916" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3285968" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3285968" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info anchor="bottom" id="Messages" order="8" visible="true" weight="0.3285968" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3090586" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.3285968" />
+      <window_info anchor="bottom" id="CMake" order="12" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,16 +208,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>347</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>22</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
           <line>373</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
@@ -231,31 +215,50 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/cube.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Bigmax_White_OBJ.obj" />
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/output.obj" />
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/Bigmax_White_OBJ.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18244">
+          <caret line="4977" column="3" lean-forward="true" selection-start-line="4977" selection-start-column="3" selection-end-line="4977" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/bunny.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-169334" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/cylinder.obj">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/cube.obj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="372" lean-forward="true" selection-start-line="372" selection-end-line="372" />
+        <state>
+          <caret selection-end-line="441" selection-end-column="1" />
           <folding>
-            <element signature="e#1112#1636#0" />
-            <element signature="e#1640#2131#0" />
-            <element signature="e#2098#8337#0" />
-            <element signature="e#1638#4896#0" />
+            <element signature="e#134#169#1" />
+            <element signature="e#172#207#1" />
+            <element signature="e#210#323#1" />
+            <element signature="e#432#1131#0" />
+            <element signature="e#1133#1657#0" />
+            <element signature="e#1659#2588#0" />
+            <element signature="e#2590#8829#0" />
+            <element signature="e#8831#12762#0" />
+            <element signature="e#12764#15231#0" />
           </folding>
         </state>
       </provider>
