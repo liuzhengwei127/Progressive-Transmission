@@ -13,12 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4d6252bb-af0d-45bd-b006-70353361b049" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/vc140.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Simplify3D.dir/vc140.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.ilk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Simplify3D.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/output.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -39,18 +33,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="441" selection-end-column="1" />
+            <state relative-caret-position="130">
+              <caret line="443" column="8" lean-forward="true" selection-start-line="443" selection-start-column="8" selection-end-line="443" selection-end-column="8" />
               <folding>
+                <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#134#169#1" />
-                <element signature="e#172#207#1" />
-                <element signature="e#210#323#1" />
-                <element signature="e#432#1131#0" />
-                <element signature="e#1133#1657#0" />
-                <element signature="e#1659#2588#0" />
-                <element signature="e#2590#8829#0" />
-                <element signature="e#8831#12762#0" />
-                <element signature="e#12764#15231#0" />
               </folding>
             </state>
           </provider>
@@ -155,11 +142,13 @@
       <workItem from="1552306422164" duration="1000" />
       <workItem from="1552451643589" duration="842000" />
       <workItem from="1552452513966" duration="246000" />
+      <workItem from="1552456317837" duration="566000" />
+      <workItem from="1552824465000" duration="219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5714000" />
+    <option name="totallyTimeSpent" value="6499000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -172,8 +161,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18997575" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.196443" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -185,7 +175,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3285968" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Messages" order="8" visible="true" weight="0.3285968" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3090586" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3090586" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3285968" />
       <window_info anchor="bottom" id="CMake" order="12" weight="0.3285968" />
@@ -203,12 +193,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>253</line>
+          <line>316</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>373</line>
+          <line>453</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
@@ -239,26 +229,19 @@
         <state relative-caret-position="-169334" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/cylinder.obj">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/cylinder.obj">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="441" selection-end-column="1" />
+        <state relative-caret-position="130">
+          <caret line="443" column="8" lean-forward="true" selection-start-line="443" selection-start-column="8" selection-end-line="443" selection-end-column="8" />
           <folding>
+            <element signature="e#0#18#0" expanded="true" />
             <element signature="e#134#169#1" />
-            <element signature="e#172#207#1" />
-            <element signature="e#210#323#1" />
-            <element signature="e#432#1131#0" />
-            <element signature="e#1133#1657#0" />
-            <element signature="e#1659#2588#0" />
-            <element signature="e#2590#8829#0" />
-            <element signature="e#8831#12762#0" />
-            <element signature="e#12764#15231#0" />
           </folding>
         </state>
       </provider>

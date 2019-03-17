@@ -26,6 +26,7 @@ vector<Point*> vertexs;
 vector<Chartlet*> chartlets;
 vector<Point*> normal_vectors;
 vector<Face*> faces;
+vector<vector<int>> vertexsOfFace;
 
 float getDistanceF(int index, int v1, int v2, int v3) {
     // 计算点到面的距离
@@ -51,27 +52,26 @@ float getDistance(int i, int j)
 
     // 简化的QEM算法
     float distance = 0;
-    int count = 0;
+    int count = vertexsOfFace[i].size() + vertexsOfFace[j].size();
+    int size;
 
-    for (int k = 0; k < faces.size(); k++) {
-        if (faces[k]->a1 == i + 1 || faces[k]->b1 == i + 1 || faces[k]->c1 == i + 1 || faces[k]->d1 == i + 1
-            || faces[k]->a1 == j + 1 || faces[k]->b1 == j + 1 || faces[k]->c1 == j + 1 || faces[k]->d1 == j + 1) {
-            distance += getDistanceF(j, faces[k]->a1 - 1, faces[k]->b1 - 1, faces[k]->c1 - 1);
-            count++;
-        }
-    }
+    size = vertexsOfFace[i].size();
+    for (int k = 0; k < size; k++)
+        distance += getDistanceF(j, faces[vertexsOfFace[i][k]]->a1 - 1, faces[vertexsOfFace[i][k]]->b1 - 1, faces[vertexsOfFace[i][k]]->c1 - 1);
+
+    size = vertexsOfFace[j].size();
+    for (int k = 0; k < size; k++)
+        distance += getDistanceF(j, faces[vertexsOfFace[j][k]]->a1 - 1, faces[vertexsOfFace[j][k]]->b1 - 1, faces[vertexsOfFace[j][k]]->c1 - 1);
 
     return distance / count;
 
 
-
-
     /*
-    // 最短边算法
     float distance = pow((vertexs[i]->x - vertexs[j]->x), 2) + pow((vertexs[i]->y - vertexs[j]->y), 2) + pow((vertexs[i]->z - vertexs[j]->z), 2);
 
     return distance;
     */
+    // 最短边算法
 }
 
 pair<int, int> getVertexToDel()
@@ -83,31 +83,33 @@ pair<int, int> getVertexToDel()
         for (int j = i + 1; j < vertexs.size(); j++)
         {
             if (i != j) {
-                float distance = getDistance(i, j);
-                if (distance < value)
-                {
-                    for (int k = 0; k<faces.size(); k++) {
-                        if ((faces[k]->a1 == i + 1 || faces[k]->b1 == i + 1 || faces[k]->c1 == i + 1 || faces[k]->d1 == i + 1)
-                            && (faces[k]->a1 == j + 1 || faces[k]->b1 == j + 1 || faces[k]->c1 == j + 1 || faces[k]->d1 == j + 1)) {
-                            value = distance;
-                            index.first = i + 1;
-                            index.second = j + 1;
+                bool flag = false;
+
+                for (int m = 0; m < vertexsOfFace[i].size(); m++) {
+                    for (int n = 0; n < vertexsOfFace[j].size(); n++) {
+                        if (vertexsOfFace[i][m] == vertexsOfFace[j][n]) {
+                            flag = true;
+
+                            float distance = getDistance(i, j);
+                            if (distance < value) {
+                                value = distance;
+                                index.first = i + 1;
+                                index.second = j + 1;
+                            }
+
+                            distance = getDistance(j, i);
+                            if (distance < value) {
+                                value = distance;
+                                index.first = j + 1;
+                                index.second = i + 1;
+                            }
+
                             break;
                         }
                     }
-                }
-                distance = getDistance(j, i);
-                if (distance < value)
-                {
-                    for (int k = 0; k<faces.size(); k++) {
-                        if ((faces[k]->a1 == i + 1 || faces[k]->b1 == i + 1 || faces[k]->c1 == i + 1 || faces[k]->d1 == i + 1)
-                            && (faces[k]->a1 == j + 1 || faces[k]->b1 == j + 1 || faces[k]->c1 == j + 1 || faces[k]->d1 == j + 1)) {
-                            value = distance;
-                            index.first = j + 1;
-                            index.second = i + 1;
-                            break;
-                        }
-                    }
+
+                    if (flag)
+                        break;
                 }
             }
         }
@@ -129,6 +131,21 @@ void Simplify(pair<int, int> index)
                     //包含三个点的面中含收缩边的两个点
                     delete faces[i];
                     faces.erase(faces.begin() + i);
+
+                    for (int j = 0; j < vertexsOfFace.size(); j++) {
+                        int ind = -1;
+                        for (int k = 0; k < vertexsOfFace[j].size(); k++) {
+                            if (vertexsOfFace[j][k] > i)
+                                vertexsOfFace[j][k]--;
+
+                            if (vertexsOfFace[j][k] == i)
+                                ind = k;
+                        }
+
+                        if (ind >= 0)
+                            vertexsOfFace[j].erase(vertexsOfFace[j].begin() + ind);
+                    }
+
                     i--;
                 }
                 else
@@ -199,6 +216,10 @@ void Simplify(pair<int, int> index)
 
                         faces[i]->a1 = faces[i]->d1;
                         faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+
+                        vertexsOfFace[faces[i]->a1 - 1].push_back(faces.size() - 1);
+                        vertexsOfFace[faces[i]->b1 - 1].push_back(faces.size() - 1);
+                        vertexsOfFace[faces[i]->c1 - 1].push_back(faces.size() - 1);
                         continue;
                     }
                     if (faces[i]->b1 == index.first)
@@ -217,6 +238,10 @@ void Simplify(pair<int, int> index)
 
                         faces[i]->b1 = faces[i]->d1;
                         faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+
+                        vertexsOfFace[faces[i]->a1 - 1].push_back(faces.size() - 1);
+                        vertexsOfFace[faces[i]->b1 - 1].push_back(faces.size() - 1);
+                        vertexsOfFace[faces[i]->c1 - 1].push_back(faces.size() - 1);
                         continue;
                     }
                     if (faces[i]->c1 == index.first)
@@ -235,6 +260,10 @@ void Simplify(pair<int, int> index)
 
                         faces[i]->c1 = faces[i]->d1;
                         faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+
+                        vertexsOfFace[faces[i]->a1 - 1].push_back(faces.size() - 1);
+                        vertexsOfFace[faces[i]->b1 - 1].push_back(faces.size() - 1);
+                        vertexsOfFace[faces[i]->c1 - 1].push_back(faces.size() - 1);
                         continue;
                     }
                     if (faces[i]->d1 == index.first)
@@ -252,6 +281,10 @@ void Simplify(pair<int, int> index)
                         faces.push_back(tmpf);
 
                         faces[i]->d1 = 0; faces[i]->d2 = 0; faces[i]->d3 = 0;
+
+                        vertexsOfFace[faces[i]->a1 - 1].push_back(faces.size() - 1);
+                        vertexsOfFace[faces[i]->b1 - 1].push_back(faces.size() - 1);
+                        vertexsOfFace[faces[i]->c1 - 1].push_back(faces.size() - 1);
                         continue;
                     }
                 }
@@ -270,6 +303,12 @@ void Simplify(pair<int, int> index)
         if (faces[i]->d1 > index.first)
             faces[i]->d1--;
     }
+
+    int size = vertexsOfFace.size();
+    for (int i = index.first; i < size; i++) {
+        vertexsOfFace[i - 1] = vertexsOfFace[i];
+    }
+    vertexsOfFace.erase(vertexsOfFace.begin() + vertexsOfFace.size() - 1);
 
     vertexs.erase(vertexs.begin() + index.first - 1);
 }
@@ -332,8 +371,11 @@ void readFile(string ifilename)
                             break;
                     }
                     break;
-                case 'f':
+                case 'f': {
                     char ch;
+
+                    vertexsOfFace.resize(vertexs.size());
+
                     line.erase(0, 2);
                     ss << line;
                     ss >> a1 >> ch >> ch;
@@ -365,25 +407,35 @@ void readFile(string ifilename)
                         ss.unget();
                         ss >> c2 >> ch >> c3;
                     }
+
+                    //判断面包含三个点或者四个点
                     if (!ss.eof())
                         ss >> d1 >> ch >> d2 >> ch >> d3 >> ch;
-                    {
-                        Face* tmpf = new Face;
-                        tmpf->a1 = a1;
-                        tmpf->a2 = a2;
-                        tmpf->a3 = a3;
-                        tmpf->b1 = b1;
-                        tmpf->b2 = b2;
-                        tmpf->b3 = b3;
-                        tmpf->c1 = c1;
-                        tmpf->c2 = c2;
-                        tmpf->c3 = c3;
-                        tmpf->d1 = d1;
-                        tmpf->d2 = d2;
-                        tmpf->d3 = d3;
-                        faces.push_back(tmpf);
-                    }
+
+                    Face* tmpf = new Face;
+                    tmpf->a1 = a1;
+                    tmpf->a2 = a2;
+                    tmpf->a3 = a3;
+                    tmpf->b1 = b1;
+                    tmpf->b2 = b2;
+                    tmpf->b3 = b3;
+                    tmpf->c1 = c1;
+                    tmpf->c2 = c2;
+                    tmpf->c3 = c3;
+                    tmpf->d1 = d1;
+                    tmpf->d2 = d2;
+                    tmpf->d3 = d3;
+                    faces.push_back(tmpf);
+
+                    int index = faces.size() - 1;
+                    vertexsOfFace[a1 - 1].push_back(index);
+                    vertexsOfFace[b1 - 1].push_back(index);
+                    vertexsOfFace[c1 - 1].push_back(index);
+                    if (d1)
+                        vertexsOfFace[d1 - 1].push_back(index);
+
                     break;
+                }
                 default:
                     break;
             }
@@ -401,7 +453,7 @@ void readFile(string ifilename)
 int main() {
     string ifilename, ofilename;
     cout << "Please input the name of file to be read" << endl;
-    ifilename = "Bigmax_White_OBJ.obj";
+    ifilename = "cube.obj";
     //cin >> ifilename;
     cout << "Please input the name of file to be written" << endl;
     ofilename = "output.obj";
@@ -409,7 +461,8 @@ int main() {
 
     readFile(ifilename);
 
-    int circle = vertexs.size() / 4;
+    int circle = 2;
+    //int circle = vertexs.size() / 4;
     //int circle = vertexs.size() / 2;
     //int circle = vertexs.size() / 2 + vertexs.size() / 3;
 
