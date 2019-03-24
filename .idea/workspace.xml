@@ -11,10 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d6252bb-af0d-45bd-b006-70353361b049" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="4d6252bb-af0d-45bd-b006-70353361b049" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -143,12 +140,12 @@
       <workItem from="1552451643589" duration="842000" />
       <workItem from="1552452513966" duration="246000" />
       <workItem from="1552456317837" duration="566000" />
-      <workItem from="1552824465000" duration="219000" />
+      <workItem from="1552824465000" duration="406000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6499000" />
+    <option name="totallyTimeSpent" value="6686000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -161,7 +158,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.196443" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
