@@ -11,7 +11,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d6252bb-af0d-45bd-b006-70353361b049" name="Default Changelist" comment="" />
+    <list default="true" id="4d6252bb-af0d-45bd-b006-70353361b049" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,12 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="443" column="8" lean-forward="true" selection-start-line="443" selection-start-column="8" selection-end-line="443" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#134#169#1" />
-              </folding>
+            <state relative-caret-position="586">
+              <caret line="537" column="1" selection-start-line="537" selection-start-column="1" selection-end-line="537" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -53,6 +52,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/main.cpp" />
       </list>
     </option>
@@ -69,7 +69,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -77,15 +76,11 @@
               <item name="Simplify3D" type="b2602c69:ProjectViewProjectNode" />
               <item name="Simplify3D" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Simplify3D" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simplify3D" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -141,11 +136,12 @@
       <workItem from="1552452513966" duration="246000" />
       <workItem from="1552456317837" duration="566000" />
       <workItem from="1552824465000" duration="406000" />
+      <workItem from="1553429252249" duration="137000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6686000" />
+    <option name="totallyTimeSpent" value="6823000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -158,8 +154,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.196443" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19967663" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -171,7 +168,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3285968" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Messages" order="8" visible="true" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3090586" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3090586" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3285968" />
       <window_info anchor="bottom" id="CMake" order="12" weight="0.3285968" />
@@ -183,22 +180,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>316</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>453</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/cube.obj">
@@ -233,12 +214,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="443" column="8" lean-forward="true" selection-start-line="443" selection-start-column="8" selection-end-line="443" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#134#169#1" />
-          </folding>
+        <state relative-caret-position="586">
+          <caret line="537" column="1" selection-start-line="537" selection-start-column="1" selection-end-line="537" selection-end-column="1" />
         </state>
       </provider>
     </entry>
