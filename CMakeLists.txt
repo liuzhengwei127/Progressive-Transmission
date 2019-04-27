@@ -3,4 +3,4 @@ project(Simplify3D)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Simplify3D main.cpp main.cpp)
+add_executable(Simplify3D main.cpp main.cpp Simplify.h)

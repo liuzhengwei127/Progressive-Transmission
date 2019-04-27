@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/75667/CLionProjects/Simplify3D/cmake-build-debug/Simplify.h">
+			<Option target="Simplify3D"/>
+		</Unit>
 		<Unit filename="C:/Users/75667/CLionProjects/Simplify3D/main.cpp">
 			<Option target="Simplify3D"/>
 		</Unit>

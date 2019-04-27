@@ -1,4 +1,4 @@
-C:\Users\75667\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\183.5429.37\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" C:\Users\75667\CLionProjects\Simplify3D
+C:\Users\75667\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\191.6707.69\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" C:\Users\75667\CLionProjects\Simplify3D
 -- Configuring done
 -- Generating done
 -- Build files have been written to: C:/Users/75667/CLionProjects/Simplify3D/cmake-build-debug
